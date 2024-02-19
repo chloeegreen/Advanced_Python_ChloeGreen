@@ -3421,6 +3421,7 @@ SeqIO.write(records, "rev_comp.fasta", "fasta")
     18
 
 ## Sequence Alignment (Videos 1-5) 
+### Videos 1-3 Below
 ```python
 #https://raw.githubusercontent.com/biopython/biopython/master/Doc/examples/PF05371_seed.sth
 ```
@@ -4459,9 +4460,7 @@ Phylo.draw_ascii(tree)
          | gi|6273284|gb|AF191658.1|AF191658
     
 
-
-
-```python
+### Videos 4-5 Below (Pairwise Alignment
 
 
 ```python
@@ -5487,4 +5486,1603 @@ cv2.imwrite("Puppy_fixed_image.jpeg", flip_img)
     True
 
 ## Part 2
+
+```python
+import cv2
+import matplotlib.pyplot as plt
+%matplotlib inline
+```
+
+
+```python
+# this reads the image
+img = cv2.imread("Puppy.jpeg")
+```
+
+
+```python
+# this shows the image but the colors are skewed
+plt.imshow(img)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f3cac9be410>
+
+
+
+![output_2_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/640b803e-a661-4822-bf7e-68538ebdb566)
+
+![png](output_2_1.png)
+
+
+
+```python
+# this is the code ot fix this specific color error
+img1 = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+```
+
+
+```python
+plt.imshow(img1)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f3cac968fd0>
+
+
+
+![output_4_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/217b1adc-bef8-4ea6-ae11-b352ab227d4f)
+
+![png](output_4_1.png)
+
+
+
+```python
+# this changes the hue saturation
+img2 = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+```
+
+
+```python
+plt.imshow(img2)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f3cac0db6d0>
+
+
+
+![output_6_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/edf73c81-0f09-4f2b-ae9e-057d82e0b575)
+
+![png](output_6_1.png)
+
+
+
+```python
+# this is another color value type 
+img3 = cv2.cvtColor(img, cv2.COLOR_BGR2HLS)
+```
+
+
+```python
+plt.imshow(img3)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f3cac0bbb10>
+
+
+![output_8_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/ab6e1442-70bc-4a85-9296-8d08c6a3a1c4)
+
+
+![png](output_8_1.png)
+
+
+
+```python
+img1 = cv2.imread("do-not-copy-stamp.jpeg")
+img2 = cv2.imread("Puppy.jpeg")
+```
+
+
+```python
+plt.imshow(img1)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f3ca5e02f10>
+
+
+
+![output_10_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/778f8274-6cd8-4e4a-8068-bdacd52aca08)
+
+![png](output_10_1.png)
+
+
+
+```python
+# this converts both of the colors to their true form
+img1 = cv2.cvtColor(img1, cv2.COLOR_BGR2RGB)
+img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2RGB)
+```
+
+
+```python
+plt.imshow(img1)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f3ca5dec150>
+
+
+
+![output_12_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/1427a940-b1bc-49db-be1d-81c3f373bb55)
+
+![png](output_12_1.png)
+
+
+
+```python
+plt.imshow(img2)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f3ca5dbafd0>
+
+
+
+![output_13_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/d4945d5a-8150-472c-899a-0ad62b090203)
+
+![png](output_13_1.png)
+
+
+
+```python
+# this resizes both images to the same size
+img1 = cv2.resize(img1, (1200,1200))
+img2 = cv2.resize(img2, (1200,1200))
+```
+
+
+```python
+# this sets the transparancy to the same amount on the image
+alpha = 0.5
+beta = 0.5
+```
+
+
+```python
+# we have now combined the two images so they are equally sized and transparent
+blended = cv2.addWeighted(img1, alpha, img2, beta, gamma= 0)
+```
+
+
+```python
+plt.imshow(blended)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f3ca5d2c2d0>
+
+
+![output_17_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/eb7a9ea8-137f-4b03-9824-82a755751a8a)
+
+
+![png](output_17_1.png)
+
+
+
+```python
+# both alpha and beta should equal 1
+alpha = 0.8
+beta = 0.2
+
+blended1 = cv2.addWeighted(img1, alpha, img2, beta, gamma = 0)
+```
+
+
+```python
+# the do not copy is now more bold 
+plt.imshow(blended1)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f3cac05cd50>
+
+
+
+![output_19_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/67011955-7940-423b-bf90-9bca0bf4a044)
+
+![png](output_19_1.png)
+
+
+
+```python
+# we have resized the first image, but left the second image alone
+img1 = cv2.imread("do-not-copy-stamp.jpeg")
+img2 = cv2.imread("Puppy.jpeg")
+
+img1 = cv2.cvtColor(img1, cv2.COLOR_BGR2RGB)
+img2 = cv2.cvtColor(img2, cv2.COLOR_BGR2RGB)
+
+img1 = cv2.resize(img1, (200,200))
+```
+
+
+```python
+# this says in location terms where the small image will be located in relation to the bigger picture
+large_img = img2
+small_img = img1
+
+x_offset = 0
+y_offset = 0
+
+x_end = x_offset + small_img.shape[1]
+y_end = y_offset + small_img.shape[0]
+
+large_img[y_offset:y_end, x_offset:x_end] = small_img
+
+plt.imshow(large_img)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f3ca5c9c910>
+
+
+
+![output_21_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/355b6660-3254-4811-9d9d-8899b33ad1cc)
+
+![png](output_21_1.png)
+
+### Part 3
+
+```python
+# https://github.com/worklifesg/Python-for-Computer-Vision-with-OpenCV-and-Deep-Learning
+```
+
+
+```python
+import cv2
+import matplotlib.pyplot as plt
+%matplotlib inline
+```
+
+
+```python
+# this sets the rainbow image as img
+img = cv2.imread("rainbow.jpg")
+```
+
+
+```python
+plt.imshow(img)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f611321f850>
+
+
+
+![output_3_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/abdf615f-c7eb-45f0-b260-15552b3033b9)
+
+![png](output_3_1.png)
+
+
+
+```python
+img = cv2.imread("rainbow.jpg", 0)
+```
+
+
+```python
+# this recalls the image as gray
+plt.imshow(img, cmap = "gray")
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f61131488d0>
+
+
+
+![output_5_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/479ed2a2-e2a5-4aa8-af44-9c405579eb06)
+
+![png](output_5_1.png)
+
+
+
+```python
+#there are 255 pixels, and 127 is about half of that 
+ret1, thresh1 = cv2.threshold(img, 127, 255, cv2.THRESH_BINARY)
+```
+
+
+```python
+# everything above 127 is going to change one color and everything below is going to be another
+ret1
+```
+
+
+
+
+    127.0
+
+
+
+
+```python
+plt.imshow(thresh1, cmap = "gray")
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f6110fa5090>
+
+
+
+![output_8_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/a14c8207-e513-41df-857c-a688dab284f5)
+
+![png](output_8_1.png)
+
+
+
+```python
+# the limits have been inversed 
+img2 = cv2.imread("rainbow.jpg", 0)
+ret1, thresh1 = cv2.threshold(img2, 127, 255, cv2.THRESH_TRUNC)
+plt.imshow(thresh1, cmap= "gray")
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f6110f84110>
+
+
+![output_9_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/8da67e4f-ee06-402a-ae74-4c3e6d148fd9)
+
+
+![png](output_9_1.png)
+
+
+
+```python
+# this changes the image to have almost a 3d appearance
+img3 = cv2.imread("rainbow.jpg", 0)
+ret1, thresh1 = cv2.threshold(img3, 127, 255, cv2.THRESH_TOZERO)
+plt.imshow(thresh1, cmap = "gray")
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f6110eedd10>
+
+
+
+![output_10_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/1c4e277b-d3ba-420e-94fe-3f3b1f3c02a9)
+
+![png](output_10_1.png)
+
+
+
+```python
+# naming img_r in association with the crossword jpg
+img_r = cv2.imread("crossword.jpg", 0)
+plt.imshow(img_r, cmap = "gray")
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f6110ed0750>
+
+
+
+![output_11_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/964b79a4-fedd-4f9b-b731-cba99ef25dfb)
+
+![png](output_11_1.png)
+
+
+
+```python
+# this has enlarged the image; we want to change all of the gray coloring to white
+def show_pic(img):
+    fig = plt.figure(figsize = (15,15))
+    ax = fig.add_subplot(111)
+    ax.imshow(img, cmap = "gray")
+```
+
+
+```python
+show_pic(img_r)
+```
+
+![output_13_0](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/093ea47a-ceed-4cc6-b956-13641526fb1d)
+
+![png](output_13_0.png)
+
+
+
+```python
+# this binary technique requires the right numbers to reach the goal
+ret, th1 = cv2.threshold(img_r, 127, 255, cv2.THRESH_BINARY)
+show_pic(th1)
+```
+
+![output_14_0](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/eed32610-bb14-4208-9425-f026bf1bc3ff)
+
+![png](output_14_0.png)
+
+
+
+```python
+# these numbers better fit the goal
+ret, th1 = cv2.threshold(img_r, 200, 255, cv2.THRESH_BINARY)
+show_pic(th1)
+```
+
+![output_15_0](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/20e47fe7-2f7d-489f-b8d2-2e3342298327)
+
+![png](output_15_0.png)
+
+
+
+```python
+# this method just outlines the boxes so we are still lacking a filling in the boxes
+th2 = cv2.adaptiveThreshold(img_r, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 8)
+```
+
+
+```python
+show_pic(th2)
+```
+
+![output_17_0](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/026c1d4b-8f45-4256-b762-b0f9083c7dd5)
+
+![png](output_17_0.png)
+
+
+
+```python
+# this blends the above photos of th1 and th2 
+blended = cv2.addWeighted(src1 = th1, alpha = 0.6,
+                         src2 = th2, beta = 0.4, gamma = 0)
+
+show_pic(blended)
+```
+
+![output_18_0](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/13a92e23-ab1c-4a57-9d7b-3c21b87c93f9)
+
+![png](output_18_0.png)
+
+
+
+```python
+th3 = cv2.adaptiveThreshold(img_r, 255, cv2.ADAPTIVE_THRESH_MEAN_C, cv2.THRESH_BINARY, 11, 8)
+
+blended = cv2.addWeighted(src1= th1, alpha = 0.6,
+                         src2 = th3, beta = 0.4, gamma = 0)
+
+show_pic(blended)
+```
+
+![output_19_0](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/763dd9d6-ec05-4a7b-97d0-594f6212e76d)
+
+![png](output_19_0.png)
+
+
+# Aspect Detection
+## Corner Detection
+
+```python
+import cv2
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+```
+
+
+```python
+# this uploads the image and names it and converts it to the correct color 
+flat_chess = cv2.imread("Chessboard_green.png")
+flat_chess = cv2.cvtColor(flat_chess, cv2.COLOR_BGR2RGB)
+plt.imshow(flat_chess)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f833cf2f8d0>
+
+
+
+![output_1_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/9b1f4ce4-6b71-475e-a943-2ded9809bb7e)
+
+![png](output_1_1.png)
+
+
+
+```python
+# this recolors the picture as gray
+gray_flat_chess = cv2.cvtColor(flat_chess, cv2.COLOR_BGR2GRAY)
+plt.imshow(gray_flat_chess, cmap = "gray")
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f833ade15d0>
+
+
+
+![output_2_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/927e3a24-c08b-47ee-a043-1bcc67b76d87)
+
+![png](output_2_1.png)
+
+
+
+```python
+real_chess = cv2.imread("chessboard.jpeg")
+real_chess = cv2.cvtColor(real_chess, cv2.COLOR_BGR2RGB)
+```
+
+
+```python
+# this uploads the real chessboard and converts it to the correct color
+plt.imshow(real_chess)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f833a5a7710>
+
+
+
+![output_4_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/eacc228f-078d-45f3-875d-68e23d45d606)
+
+![png](output_4_1.png)
+
+
+
+```python
+# this recolors the real board to gray 
+gray_real_chess = cv2.cvtColor(real_chess, cv2.COLOR_BGR2GRAY)
+plt.imshow(gray_real_chess, cmap = "gray")
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f833a5575d0>
+
+
+
+![output_5_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/3ffd2a47-4884-4f88-8e72-ec876a2e6428)
+
+![png](output_5_1.png)
+
+
+
+```python
+# ksize is the aperture, blockSize is how far out it appears and this is corner harris detection
+gray = np.float32(gray_flat_chess)
+dst = cv2.cornerHarris(src = gray, blockSize = 2, ksize = 3, k = 0.04)
+
+dst = cv2.dilate(dst, None)
+```
+
+
+```python
+# this wants the corner harris detection and says everytime to make it red
+flat_chess[dst>0.01*dst.max()] = [255,0,0]
+
+plt.imshow(flat_chess)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f8338c3f710>
+
+
+
+![output_7_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/b569af4b-63e1-4b6c-91e7-2ff8f22aa2b5)
+
+![png](output_7_1.png)
+
+
+
+```python
+# this is the corner detection on the real chessboard
+gray = np.float32(gray_real_chess)
+dst = cv2.cornerHarris(src = gray, blockSize = 2, ksize = 3, k = 0.04)
+dst = cv2.dilate(dst, None)
+# 255, 0 ,0 is just the color red we are recalling
+real_chess[dst>0.01*dst.max()] = [255,0,0]
+```
+
+
+```python
+plt.imshow(real_chess)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f833a571810>
+
+
+
+![output_9_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/945de1d5-f6df-445b-a03c-117c8430ebef)
+
+![png](output_9_1.png)
+
+
+
+```python
+#Shi-Tomasi Corner Detection
+
+# we are detecting the quality level with 0.01 and 10 is the minimum distance
+corners = cv2.goodFeaturesToTrack(gray_flat_chess, 64, 0.01, 10)
+
+```
+
+
+```python
+# this looks just as fine in terms of the harris corner detection
+corners = np.int0(corners)
+
+for i in corners: 
+    x,y = i.ravel()
+    cv2.circle(flat_chess, (x,y),3,(255,0,0), -1)
+    
+plt.imshow(flat_chess)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f8338be5b50>
+
+
+
+![output_11_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/c931b109-8fc6-429f-8dee-9a6c6485fdf0)
+
+![png](output_11_1.png)
+
+
+```python
+# this adds to the image before so that they have green dots
+corners = cv2.goodFeaturesToTrack(gray_real_chess, 100, 0.01, 10)
+
+corners = np.int0(corners)
+
+for i in corners: 
+    x, y = i.ravel()
+    cv2.circle(real_chess, (x,y), 3, (0,255,0), -1)
+    
+plt.imshow(real_chess)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f8338b9c510>
+
+
+
+![output_12_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/c27a9fd8-8666-433a-84fe-b77434d9c8c0)
+
+![png](output_12_1.png)
+
+## Edge Detection
+
+```python
+import cv2
+```
+
+
+```python
+import numpy as np
+```
+
+
+```python
+import matplotlib.pyplot as plt
+%matplotlib inline
+```
+
+
+```python
+# this labels the puppy as the image; we don't have to change the colors in edge detection
+img = cv2.imread("Puppy.jpeg")
+plt.imshow(img)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f80fc0d4a10>
+
+
+
+![output_3_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/9967f6ba-7277-4875-9264-879db142b2db)
+
+![png](output_3_1.png)
+
+
+
+```python
+# the number values recall the color that will show the edges
+edges = cv2. Canny(image = img, threshold1 = 127, threshold2 = 127)
+
+plt.imshow(edges)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f80f5dd2090>
+
+
+
+![output_4_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/e415868e-776e-44ff-9a15-53ef4e44da7d)
+
+![png](output_4_1.png)
+
+
+
+```python
+# the median color value of the image is as follows
+med_value = np.median(img)
+med_value
+```
+
+
+
+
+    152.0
+
+
+
+
+```python
+# this says the lower threshold is 0 or 70% of the median value
+lower = int(max(0, 0.7*med_value))
+# this says the higher threwshold is 255 or 30% above the median value
+upper = int(min(255,1.3*med_value))
+
+edges = cv2.Canny(img, threshold1= lower, threshold2 = upper)
+
+plt.imshow(edges)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f80f554ed50>
+
+
+
+![output_6_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/8c1c2954-8b8b-4a2d-baf0-1cec8e56964b)
+
+![png](output_6_1.png)
+
+
+
+```python
+# this says threshold 2 is the upper + 100
+edges = cv2.Canny(image = img, threshold1 = lower, threshold2 = upper +100)
+
+plt.imshow(edges)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f80f5532c10>
+
+
+
+![output_7_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/ab0af01d-b896-453f-b97d-d3070c68043d)
+
+![png](output_7_1.png)
+
+
+
+```python
+# this blurs the image to better define the edges
+blurred_img = cv2.blur(img, ksize = (5,5))
+
+edges = cv2.Canny(image=blurred_img,
+                 threshold1 = lower,
+                 threshold2 = upper)
+
+plt.imshow(edges)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f80f54ab1d0>
+
+
+
+![output_8_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/60c815b5-30d8-4fe9-b9da-651034b12159)
+
+![png](output_8_1.png)
+
+
+
+```python
+# we have now increased the ksize 
+blurred_img = cv2.blur(img, ksize = (7,7))
+
+edges = cv2.Canny(image=blurred_img,
+                 threshold1 = lower,
+                 threshold2 = upper)
+
+plt.imshow(edges)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f80f540e350>
+
+
+
+![output_9_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/c1b504bc-9df6-4383-b871-6e374762d153)
+
+![png](output_9_1.png)
+
+
+
+```python
+# the threshold2 can be increased again
+blurred_img = cv2.blur(img, ksize = (5,5))
+
+edges = cv2.Canny(image=blurred_img,
+                 threshold1 = lower,
+                 threshold2 = upper + 50)
+
+plt.imshow(edges)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f80f53ec610>
+
+
+
+![output_10_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/154f71e5-6180-4fbe-b26d-7a6b96de2d7c)
+
+![png](output_10_1.png)
+
+
+
+```python
+blurred_img = cv2.blur(img, ksize = (5,5))
+
+edges = cv2.Canny(image=blurred_img,
+                 threshold1 = lower,
+                 threshold2 = upper + 100)
+
+plt.imshow(edges)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f80f53507d0>
+
+
+
+![output_11_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/5cf91f3d-fdc8-44b7-a4f3-0c250b08a638)
+
+![png](output_11_1.png)
+
+
+
+```python
+# this is the best value to outline the dog
+blurred_img = cv2.blur(img, ksize = (4,4))
+
+edges = cv2.Canny(image=blurred_img,
+                 threshold1 = lower,
+                 threshold2 = upper + 35)
+
+plt.imshow(edges)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f80f4f361d0>
+
+
+
+![output_12_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/5eaf1cb0-a4eb-4b89-a18d-fbcdf5f46fcf)
+
+![png](output_12_1.png)
+
+    
+    
+    
+# Feature Detection
+## Feature Matches
+
+```python
+import cv2
+import numpy as np 
+import matplotlib.pyplot as plt
+%matplotlib inline
+```
+
+
+```python
+def display(img, cmap= "gray"):
+    fig = plt.figure(figsize = (12, 10))
+    ax = fig.add_subplot(111)
+    ax.imshow(img, cmap= "gray")
+```
+
+
+```python
+# we are defining the apple_jacks image
+apple_jacks = cv2.imread("apple_jacks.jpeg", 0)
+display(apple_jacks)
+```
+
+![output_2_0](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/8a381757-c3e1-4488-86d1-7513a112c7d3)
+
+![png](output_2_0.png)
+
+
+
+```python
+cereals = cv2.imread("Cereals.jpeg", 0)
+display(cereals)
+```
+
+![output_3_0](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/e29eddd4-d43b-4845-b6ad-7c1647f48554)
+
+![png](output_3_0.png)
+
+
+
+```python
+# this is a way of finding key points and descriptors in the thing we are searchign for 
+orb = cv2.ORB_create()
+
+kp1,des1 = orb.detectAndCompute(apple_jacks, mask=None)
+kp2,des2 = orb.detectAndCompute(cereals, mask=None)
+```
+
+
+```python
+# this says we want to match the two des
+bf = cv2.BFMatcher(cv2.NORM_HAMMING, crossCheck = True)
+matches = bf.match(des1, des2)
+```
+
+
+```python
+# this tells it thay we only want the good matches
+matches = sorted(matches, key = lambda x:x.distance)
+```
+
+
+```python
+# this says we only want the first 25 matches
+apple_jacks_matches = cv2.drawMatches(apple_jacks, kp1, cereals, kp2, matches[:25], None, flags = 2)
+```
+
+
+```python
+# this is not the most efficient method because it matches 
+display(apple_jacks_matches)
+```
+
+![output_8_0](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/047325cc-08bc-4923-8061-22ba86934942)
+
+![png](output_8_0.png)
+
+
+
+```python
+# this uses the sift method to look through the cereals
+sift = cv2.SIFT_create()
+```
+
+
+```python
+kp1, des1 = sift.detectAndCompute(apple_jacks, None)
+kp2, des2 = sift.detectAndCompute(cereals, None)
+```
+
+
+```python
+# this findsthe best matches from the descriptor for the set
+bf = cv2.BFMatcher()
+matches = bf.knnMatch(des1, des2, k=2)
+```
+
+
+```python
+# the least distance between the pairs the better and sets the distance of a good match
+good = []
+
+for match1, match2 in matches: 
+    if match1.distance < 0.7*match2.distance:
+        good.append([match1])
+```
+
+
+```python
+# this compares the amount of matches to the total
+print("Length of total matches:", len(matches))
+print("Length of good matches:", len(good))
+```
+
+    Length of total matches: 4323
+    Length of good matches: 69
+
+
+
+```python
+# this sifts through the matches to find the best; as seen, the most matches are on the apple jacks box in the cereal
+sift_matches = cv2.drawMatchesKnn(apple_jacks, kp1, cereals, kp2, good, None, flags =2)
+display(sift_matches)
+```
+
+![output_14_0](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/7b614108-a70b-478e-bc23-06cb1005b91d)
+
+![png](output_14_0.png)
+
+
+
+```python
+sift = cv2.SIFT_create()
+
+kp1, des1 = sift.detectAndCompute(apple_jacks, None)
+kp2, des2 = sift.detectAndCompute(cereals, None)
+```
+
+
+```python
+# this sets the index and search paramaters 
+flann_index_KDtree = 0
+index_params = dict(algorithm=flann_index_KDtree, tress = 5)
+search_params = dict(checks=50)
+```
+
+
+```python
+# this sets the match distance
+flann = cv2.FlannBasedMatcher(index_params, search_params)
+
+matches = flann.knnMatch(des1, des2, k=2)
+
+good = []
+
+for match1, match2, in matches:
+    if match1.distance < 0.75*match2.distance:
+        good.append([match1])
+```
+
+
+```python
+# this is another way of matching and again proves mostly accurate matches to the apple jacks box
+flann_matches = cv2.drawMatchesKnn(apple_jacks, kp1, cereals, kp2, good, None, flags = 0)
+display(flann_matches)
+```
+
+![output_18_0](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/918d0fc5-92be-4f8a-99e1-5397764c27b5)
+
+![png](output_18_0.png)
+
+
+
+```python
+sift = cv2.SIFT_create()
+
+kp1, des1 = sift.detectAndCompute(apple_jacks, None)
+kp2, des2 = sift.detectAndCompute(cereals, None)
+```
+
+
+```python
+flann_index_KDtree = 0
+index_params = dict(algorithm=flann_index_KDtree, tress = 5)
+search_params = dict(checks=50)
+```
+
+
+```python
+flann = cv2.FlannBasedMatcher(index_params, search_params)
+
+matches = flann.knnMatch(des1, des2, k =2)
+```
+
+
+```python
+# this means that pure black will be added
+matchesMask = [[0,0] for i in range(len(matches))]
+```
+
+
+```python
+# this sets the diance and recalls the parameters and sets the color as red for the boxes and the green lines as a single color
+for i, (match1, match2) in enumerate(matches):
+    if match1.distance <0.75*match2.distance:
+        matchesMask[i] = [1,0]
+        
+draw_params = dict(matchColor = (0,255,0),
+                  singlePointColor = (255,0,0),
+                   matchesMask = matchesMask,
+                   flags = 0)
+```
+
+
+```python
+# this is the most easilly seen 
+flann_matches = cv2.drawMatchesKnn(apple_jacks, kp1, cereals, kp2, matches, None, **draw_params)
+
+display(flann_matches)
+```
+
+![output_24_0](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/6cf07564-909c-4bbc-94d2-783df3905f80)
+
+![png](output_24_0.png)
+
+
+
+
+## Edge Detection
+
+```python
+import cv2
+```
+
+
+```python
+import numpy as np
+```
+
+
+```python
+import matplotlib.pyplot as plt
+%matplotlib inline
+```
+
+
+```python
+# this labels the puppy as the image; we don't have to change the colors in edge detection
+img = cv2.imread("Puppy.jpeg")
+plt.imshow(img)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f80fc0d4a10>
+
+
+
+![output_3_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/9967f6ba-7277-4875-9264-879db142b2db)
+
+![png](output_3_1.png)
+
+
+
+```python
+# the number values recall the color that will show the edges
+edges = cv2. Canny(image = img, threshold1 = 127, threshold2 = 127)
+
+plt.imshow(edges)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f80f5dd2090>
+
+
+
+![output_4_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/e415868e-776e-44ff-9a15-53ef4e44da7d)
+
+![png](output_4_1.png)
+
+
+
+```python
+# the median color value of the image is as follows
+med_value = np.median(img)
+med_value
+```
+
+
+
+
+    152.0
+
+
+
+
+```python
+# this says the lower threshold is 0 or 70% of the median value
+lower = int(max(0, 0.7*med_value))
+# this says the higher threwshold is 255 or 30% above the median value
+upper = int(min(255,1.3*med_value))
+
+edges = cv2.Canny(img, threshold1= lower, threshold2 = upper)
+
+plt.imshow(edges)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f80f554ed50>
+
+
+
+![output_6_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/8c1c2954-8b8b-4a2d-baf0-1cec8e56964b)
+
+![png](output_6_1.png)
+
+
+
+```python
+# this says threshold 2 is the upper + 100
+edges = cv2.Canny(image = img, threshold1 = lower, threshold2 = upper +100)
+
+plt.imshow(edges)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f80f5532c10>
+
+
+
+![output_7_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/ab0af01d-b896-453f-b97d-d3070c68043d)
+
+![png](output_7_1.png)
+
+
+
+```python
+# this blurs the image to better define the edges
+blurred_img = cv2.blur(img, ksize = (5,5))
+
+edges = cv2.Canny(image=blurred_img,
+                 threshold1 = lower,
+                 threshold2 = upper)
+
+plt.imshow(edges)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f80f54ab1d0>
+
+
+
+![output_8_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/60c815b5-30d8-4fe9-b9da-651034b12159)
+
+![png](output_8_1.png)
+
+
+
+```python
+# we have now increased the ksize 
+blurred_img = cv2.blur(img, ksize = (7,7))
+
+edges = cv2.Canny(image=blurred_img,
+                 threshold1 = lower,
+                 threshold2 = upper)
+
+plt.imshow(edges)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f80f540e350>
+
+
+
+![output_9_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/c1b504bc-9df6-4383-b871-6e374762d153)
+
+![png](output_9_1.png)
+
+
+
+```python
+# the threshold2 can be increased again
+blurred_img = cv2.blur(img, ksize = (5,5))
+
+edges = cv2.Canny(image=blurred_img,
+                 threshold1 = lower,
+                 threshold2 = upper + 50)
+
+plt.imshow(edges)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f80f53ec610>
+
+
+
+![output_10_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/154f71e5-6180-4fbe-b26d-7a6b96de2d7c)
+
+![png](output_10_1.png)
+
+
+
+```python
+blurred_img = cv2.blur(img, ksize = (5,5))
+
+edges = cv2.Canny(image=blurred_img,
+                 threshold1 = lower,
+                 threshold2 = upper + 100)
+
+plt.imshow(edges)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f80f53507d0>
+
+
+
+![output_11_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/5cf91f3d-fdc8-44b7-a4f3-0c250b08a638)
+
+![png](output_11_1.png)
+
+
+
+```python
+# this is the best value to outline the dog
+blurred_img = cv2.blur(img, ksize = (4,4))
+
+edges = cv2.Canny(image=blurred_img,
+                 threshold1 = lower,
+                 threshold2 = upper + 35)
+
+plt.imshow(edges)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f80f4f361d0>
+
+
+
+![output_12_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/5eaf1cb0-a4eb-4b89-a18d-fbcdf5f46fcf)
+
+![png](output_12_1.png)
+
+
+
+## Object Detection
+
+```python
+import cv2
+```
+
+
+```python
+import numpy as np 
+```
+
+
+```python
+import matplotlib.pyplot as plt
+```
+
+
+```python
+%matplotlib inline
+```
+
+
+```python
+# this sets the training sunflower as full
+full = cv2.imread("Training_Sunflower.jpeg")
+```
+
+
+```python
+# this converts it to the correct color
+full = cv2.cvtColor(full, cv2.COLOR_BGR2RGB)
+```
+
+
+```python
+# this displays it 
+plt.imshow(full)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f460862d250>
+
+
+
+![output_6_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/e8a7adca-6be8-46e9-b5da-144f99d98993)
+
+![png](output_6_1.png)
+
+
+
+```python
+# this calls the testing sunflower the test
+test = cv2.imread("Testing_Sunflower.jpeg")
+```
+
+
+```python
+# this changes the color of the testing 
+test = cv2.cvtColor(test, cv2.COLOR_BGR2RGB)
+```
+
+
+```python
+plt.imshow(test)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7f460476af10>
+
+
+
+![output_9_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/0257ae6f-3ddc-4377-87c4-cc9d9e6d1b21)
+
+![png](output_9_1.png)
+
+
+
+```python
+# this says the shape of both images
+print("Full image shape:", full.shape)
+print("Training image shape:", test.shape)
+```
+
+    Full image shape: (360, 382, 3)
+    Training image shape: (1999, 3229, 3)
+
+
+
+```python
+# these are equations saves into the word methods
+methods = ["cv2.TM_CCOEFF", "cv2.TM_CCOEFF_NORMED", "cv2.TM_CCORR", "cv2.TM_SQDIFF", "cv2.TM_SQDIFF_NORMED"]
+```
+
+
+```python
+# this tries to draw a heat map around the closest distribution of pixels and draws the rectangle on where it matches
+for m in methods: 
+    
+    test_copy = test.copy()
+    method = eval(m)
+    
+    res = cv2.matchTemplate(test_copy, full, method)
+    
+    min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(res)
+    
+    if method in [cv2.TM_SQDIFF, cv2.TM_SQDIFF_NORMED]:
+        top_left = min_loc
+    else: 
+        top_left = max_loc
+        
+        
+# this says to start at the top left and add the assigned height and width
+    height, width, channels = full.shape
+    bottom_right = (top_left[0] + width, top_left[1] + height)
+    
+    cv2.rectangle(test_copy, top_left, bottom_right, (255,0,0),10)
+# this gives all of the details for the plot
+    
+    plt.subplot(121)
+    plt.imshow(res)
+    plt.title("Heatmap of template matching")
+    plt.subplot(122)
+    plt.imshow(test_copy)
+    plt.title("Detection of template")
+    
+    plt.suptitle(m)
+    
+    plt.show()
+    print("\n")
+    print("\n")
+```
+
+![output_12_0](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/ff96933a-0bea-48d8-a75e-a09051e4c336)
+
+![png](output_12_0.png)
+
+
+    
+    
+    
+    
+
+
+![output_12_2](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/83c6d3d1-b7d4-42af-9fb2-cf4a61ce1d3c)
+
+![png](output_12_2.png)
+
+
+    
+    
+    
+    
+
+
+![output_12_4](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/e55c574e-cc0e-4040-b0a6-76091e0b760d)
+
+![png](output_12_4.png)
+
+
+    
+    
+    
+    
+
+
+![output_12_6](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/138aa7c9-42e3-423f-aa0f-97f5b93dee1c)
+
+![png](output_12_6.png)
+
+
+    
+    
+    
+    
+
+
+![output_12_8](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/22471315-6776-4295-926b-fe01bd3a7b39)
+
+![png](output_12_8.png)
+
+
 
