@@ -5205,10 +5205,157 @@ aligner.score(target, query, strand = "+")
     3.3
 
 
-## PLACE BLAST AND CHALLENGE HERE 
+# Blast
+```python
+from Bio.Blast import NCBIWWW
+```
+
+
+```python
+NCBIWWW.email = "ceg037@latech.edu"
+# the blast of the below gene code will be done below 
+```
+
+
+```python
+result_handle = NCBIWWW.qblast("blastn", "nt", "8332116")
+```
+
+
+```python
+# https://github.com/biopython/biopython/blob/master/Doc/examples/m_cold.fasta
+```
+
+
+```python
+from Bio import SeqIO
+```
+
+
+```python
+# this sets the record as the uploaded file
+record = SeqIO.read("m_cold.fasta.txt", format = "fasta")
+```
+
+
+```python
+# this prints the cold file
+print(record)
+```
+
+    ID: gi|8332116|gb|BE037100.1|BE037100
+    Name: gi|8332116|gb|BE037100.1|BE037100
+    Description: gi|8332116|gb|BE037100.1|BE037100 MP14H09 MP Mesembryanthemum crystallinum cDNA 5' similar to cold acclimation protein, mRNA sequence
+    Number of features: 0
+    Seq('CACTAGTACTCGAGCGTNCTGCACCAATTCGGCACGAGCAAGTGACTACGTTNT...TTC')
+
+
+
+```python
+result_handle = NCBIWWW.qblast("blastn", "nt", record.seq)
+```
+
+
+```python
+# this opens a the file and reads the handle
+with open("m_cold.fasta.txt", "w") as out_handle:
+    out_handle.write(result_handle.read())
+result_handle.close()
+```
+
+
+```python
+from Bio.Blast import NCBIXML
+```
+
+
+```python
+result_handle = open("my_blast.xml")
+```
+
+
+    ---------------------------------------------------------------------------
+
+    FileNotFoundError                         Traceback (most recent call last)
+
+    <ipython-input-20-5d5d42105f61> in <module>
+    ----> 1 result_handle = open("my_blast.xml")
+    
+
+    FileNotFoundError: [Errno 2] No such file or directory: 'my_blast.xml'
+
+
+##### I could not get this to run, therefore, the following codes would not run... However, they are all present
+```python
+blast_record = NCBIXML.read(result_handle)
+```
+
+
+    ---------------------------------------------------------------------------
+
+    ValueError                                Traceback (most recent call last)
+
+    <ipython-input-18-78f787b795c5> in <module>
+    ----> 1 blast_record = NCBIXML.read(result_handle)
+    
+
+    ~/anaconda3/lib/python3.7/site-packages/Bio/Blast/NCBIXML.py in read(handle, debug)
+        746     iterator = parse(handle, debug)
+        747     try:
+    --> 748         record = next(iterator)
+        749     except StopIteration:
+        750         raise ValueError("No records found in handle") from None
+
+
+    ~/anaconda3/lib/python3.7/site-packages/Bio/Blast/NCBIXML.py in parse(handle, debug)
+        787 
+        788     pending = ""
+    --> 789     text = handle.read(BLOCK)
+        790     if isinstance(text, bytes):
+        791         # Not a text handle, raw bytes mode
+
+
+    ValueError: I/O operation on closed file
+
+
+
+```python
+E_VALUE_THRESH = 0.04
+```
+
+
+```python
+for alignment in blast_record.alignments:
+    for hsp in alignment.hsps:
+        if hsp.expect < E_VALUE_THRESH:
+            print("****ALIGNMENT****")
+            print("sequence:", alignment.title)
+            print("length:", alignment.length)
+            print("e value:", hsp.expect)
+            print(hsp.query[0:75] + "...")
+            print(hsp.match[0:75] + "...")
+            print(hsp.sbjct[0:75] + "...")
+```
+
+
+    ---------------------------------------------------------------------------
+
+    NameError                                 Traceback (most recent call last)
+
+    <ipython-input-4-ae107f6627f0> in <module>
+    ----> 1 for alignment in blast_record.alignments:
+          2     for hsp in alignment.hsps:
+          3         if hsp.expect < E_VALUE_THRESH:
+          4             print("****ALIGNMENT****")
+          5             print("sequence:", alignment.title)
+
+
+    NameError: name 'blast_record' is not defined
+# Challenge 1
+
 
 # Open CV
-# Part 1
+## Part 1
 
 ```python
 import numpy as np
@@ -5754,7 +5901,7 @@ plt.imshow(large_img)
 
 ![png](output_21_1.png)
 
-### Part 3
+## Part 3
 
 ```python
 # https://github.com/worklifesg/Python-for-Computer-Vision-with-OpenCV-and-Deep-Learning
