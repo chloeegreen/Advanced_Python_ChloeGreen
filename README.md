@@ -5208,7 +5208,7 @@ aligner.score(target, query, strand = "+")
 
 ## PLACE BLAST AND CHALLENGE HERE 
 
-## Open CV
+# Open CV
 # Part 1
 
 ```python
@@ -5486,8 +5486,5 @@ cv2.imwrite("Puppy_fixed_image.jpeg", flip_img)
 
     True
 
-
-
-
-```python
+## Part 2
 
