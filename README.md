@@ -2060,7 +2060,7 @@ print("%s %i %i %i %i" % (rc.id, len(rc), len(rc.features), len(rc.dbxrefs), len
 
     Testing 9609 41 0 0
 
-## Sequence Input (Videos 1-3)
+## Sequence Input & Output (Videos 1-3)
 
 ```python
 from Bio import SeqIO
@@ -3421,7 +3421,6 @@ SeqIO.write(records, "rev_comp.fasta", "fasta")
     18
 
 ## Sequence Alignment (Videos 1-5) 
-# Video 1-3 
 ```python
 #https://raw.githubusercontent.com/biopython/biopython/master/Doc/examples/PF05371_seed.sth
 ```
@@ -4465,4 +4464,1030 @@ Phylo.draw_ascii(tree)
 ```python
 
 
-# Sequence Alignment Videos 4-5
+```python
+print(aligner)
+```
+
+
+    ---------------------------------------------------------------------------
+
+    NameError                                 Traceback (most recent call last)
+
+    <ipython-input-1-c585d3e4bf38> in <module>
+    ----> 1 print(aligner)
+    
+
+    NameError: name 'aligner' is not defined
+
+
+
+```python
+from Bio import Align
+```
+
+
+```python
+aligner = Align.PairwiseAligner()
+```
+
+
+```python
+# this sets the score to be 1.0 for every match
+aligner = Align.PairwiseAligner(match_score = 1.0)
+```
+
+
+```python
+target = "GAACT"
+```
+
+
+```python
+query = "GAT"
+```
+
+
+```python
+# the score can be defined 
+score = aligner.score(target, query)
+```
+
+
+```python
+# this shows we have a score of three overlaps
+score
+```
+
+
+
+
+    3.0
+
+
+
+
+```python
+alignments = aligner.align(target, query)
+```
+
+
+```python
+# this shows why the scores are qhat they are
+for alignment in alignments:
+    print(alignment)
+```
+
+    target            0 GAACT 5
+                      0 ||--| 5
+    query             0 GA--T 3
+    
+    target            0 GAACT 5
+                      0 |-|-| 5
+    query             0 G-A-T 3
+    
+
+
+
+```python
+aligner.mode = "local"
+```
+
+
+```python
+
+target = "AGAACTC"
+```
+
+
+```python
+query = "GAACT"
+```
+
+
+```python
+score = aligner.score(target, query)
+```
+
+
+```python
+# there is a score of 5 because the target sequence has 5  components of the query
+score
+```
+
+
+
+
+    5.0
+
+
+
+
+```python
+alignments = aligner.align(target, query)
+```
+
+
+```python
+# this shows the calculation behind the score
+for alignment in alignments:
+    print(alignment)
+```
+
+    target            1 GAACT 6
+                      0 ||||| 5
+    query             0 GAACT 5
+    
+
+
+
+```python
+print(aligner)
+```
+
+    Pairwise sequence aligner with parameters
+      wildcard: None
+      match_score: 1.000000
+      mismatch_score: 0.000000
+      target_internal_open_gap_score: 0.000000
+      target_internal_extend_gap_score: 0.000000
+      target_left_open_gap_score: 0.000000
+      target_left_extend_gap_score: 0.000000
+      target_right_open_gap_score: 0.000000
+      target_right_extend_gap_score: 0.000000
+      query_internal_open_gap_score: 0.000000
+      query_internal_extend_gap_score: 0.000000
+      query_left_open_gap_score: 0.000000
+      query_left_extend_gap_score: 0.000000
+      query_right_open_gap_score: 0.000000
+      query_right_extend_gap_score: 0.000000
+      mode: local
+    
+
+
+
+```python
+# this recalls the algorithm in which the calculations are used 
+aligner.algorithm
+```
+
+
+
+
+    'Smith-Waterman'
+
+
+
+
+```python
+# the absolute difference is less than epsilon between two values
+aligner.epsilon
+```
+
+
+
+
+    1e-06
+
+
+
+
+```python
+from Bio import Align
+```
+
+
+```python
+aligner = Align.PairwiseAligner()
+```
+
+
+```python
+# defines target
+target = "GAACT"
+```
+
+
+```python
+# defines query 
+query = "GAT"
+```
+
+
+```python
+alignments = aligner.align(target, query)
+```
+
+
+```python
+alignment = alignments[0]
+```
+
+
+```python
+alignment
+```
+
+
+
+
+    <Alignment object (2 rows x 5 columns) at 0x7fd6e452b1d0>
+
+
+
+
+```python
+# the target score a 3.0 because it has 3 of the components of the query
+alignment.score
+```
+
+
+
+
+    3.0
+
+
+
+
+```python
+# this recalls the target
+alignment.target
+```
+
+
+
+
+    'GAACT'
+
+
+
+
+```python
+# recalls the query 
+alignment.query
+```
+
+
+
+
+    'GAT'
+
+
+
+
+```python
+# actually visualize the alignment
+print(alignment)
+```
+
+    target            0 GAACT 5
+                      0 ||--| 5
+    query             0 GA--T 3
+    
+
+
+
+```python
+# the coordinates of the alignment can be defined
+alignment.coordinates
+```
+
+
+
+
+    array([[0, 2, 4, 5],
+           [0, 2, 2, 3]])
+
+
+
+
+```python
+# the length can be defined
+len(alignment)
+```
+
+
+
+
+    2
+
+
+
+
+```python
+# this defines it as two rows and five columns
+alignment.shape
+```
+
+
+
+
+    (2, 5)
+
+
+
+
+```python
+alignment.mode = "local"
+```
+
+
+```python
+# defines a new target and query
+local_alignments = aligner.align("TGAACT", "GAC")
+```
+
+
+```python
+local_alignment = local_alignments[0]
+```
+
+
+```python
+print(local_alignment)
+```
+
+    target            0 TGAACT 6
+                      0 -||-|- 6
+    query             0 -GA-C- 3
+    
+
+
+
+```python
+# the local alignments shape is two rows and six columns 
+local_alignment.shape
+```
+
+
+
+
+    (2, 6)
+
+
+
+
+```python
+aligner.mode = "global"
+```
+
+
+```python
+# if there are no pairs, then -10 will be deducted
+aligner = Align.PairwiseAligner(match = 1.0, mismatch_score = -10)
+```
+
+
+```python
+alignments = aligner.align("AAACAAA", "AAAGAAA")
+```
+
+
+```python
+len(alignments)
+```
+
+
+
+
+    2
+
+
+
+
+```python
+# the gaps allow for the score to be zero since letters aren't technically being matched
+print(alignments[0])
+```
+
+    target            0 AAAC-AAA 7
+                      0 |||--||| 8
+    query             0 AAA-GAAA 7
+    
+
+
+
+```python
+print(alignments[1])
+```
+
+    target            0 AAA-CAAA 7
+                      0 |||--||| 8
+    query             0 AAAG-AAA 7
+    
+
+
+
+```python
+print(local_alignment)
+```
+
+    target            0 TGAACT 6
+                      0 -||-|- 6
+    query             0 -GA-C- 3
+    
+
+
+
+```python
+print(alignments[1])
+```
+
+    target            0 AAA-CAAA 7
+                      0 |||--||| 8
+    query             0 AAAG-AAA 7
+    
+
+
+
+```python
+print(local_alignment)
+```
+
+    target            0 -GA-C- 3
+                      0 -||-|- 6
+    query             0 TGAACT 6
+    
+
+
+
+```python
+from Bio import Align
+```
+
+
+```python
+from Bio.Seq import reverse_complement
+```
+
+
+```python
+# define the target
+target = "AAACCC"
+```
+
+
+```python
+# define the query 
+query = "AACC"
+```
+
+
+```python
+# this says if they do not match, a scare of -1 and if there is a gap, a score of -1
+aligner = Align.PairwiseAligner(mismatch_score = -1, internal_gap_score = -1)
+```
+
+
+```python
+aligner.score(target, query)
+```
+
+
+
+
+    4.0
+
+
+
+
+```python
+# this defines the score of the reverse complement of the query compared with the target 
+aligner.score(target, reverse_complement(query))
+```
+
+
+
+
+    0.0
+
+
+
+
+```python
+aligner.score(target, reverse_complement(query), strand = "-")
+```
+
+
+
+
+    4.0
+
+
+
+
+```python
+aligner.score(target, query, strand = "-")
+```
+
+
+
+
+    0.0
+
+
+
+
+```python
+alignments = aligner.align(target, query)
+```
+
+
+```python
+# this tells the number of objects present
+len(alignments)
+```
+
+
+
+
+    1
+
+
+
+
+```python
+print(alignments[0])
+```
+
+    target            0 AAACCC 6
+                      0 -||||- 6
+    query             0 -AACC- 4
+    
+
+
+
+```python
+# bed is a type of file in which it lays out the alignments
+print(alignments[0].format("bed"))
+```
+
+    target	1	5	query	4.0	+	1	5	0	1	4,	0,
+    
+
+
+
+```python
+# this recalls the reverse complement of the negative strand
+alignments = aligner.align(target, reverse_complement(query), strand = "-")
+```
+
+
+```python
+print(alignments[0].format("bed"))
+```
+
+    target	1	5	query	4.0	-	1	5	0	1	4,	0,
+    
+
+
+
+```python
+alignments = aligner.align(target, query, strand = "-")
+```
+
+
+```python
+len(alignments)
+```
+
+
+
+
+    2
+
+
+
+
+```python
+print(alignments[0])
+```
+
+    target            0 AAACCC----  6
+                      0 ---------- 10
+    query             4 ------GGTT  0
+    
+
+
+
+```python
+print(alignments[0])
+```
+
+    target            0 AAACCC----  6
+                      0 ---------- 10
+    query             4 ------GGTT  0
+    
+
+
+
+```python
+print(alignments[1])
+```
+
+    target            0 ----AAACCC  6
+                      0 ---------- 10
+    query             4 GGTT------  0
+    
+
+
+
+```python
+# defines left gap score
+aligner.left_gap_score = -0.5
+```
+
+
+```python
+# defines right gap score
+aligner.right_gap_score = -0.2
+```
+
+
+```python
+# total of scoring for defined target and query
+aligner.score(target, query)
+```
+
+
+
+
+    3.3
+
+
+
+
+```python
+alignments = aligner.align(target, query)
+```
+
+
+```python
+len(alignments)
+```
+
+
+
+
+    1
+
+
+
+
+```python
+# this shows the target and query and why they were scored the way they were
+print(alignments[0])
+```
+
+    target            0 AAACCC 6
+                      0 -||||- 6
+    query             0 -AACC- 4
+    
+
+
+
+```python
+alignments = aligner.align(target, reverse_complement(query), strand = "-")
+```
+
+
+```python
+print(alignments)
+```
+
+    <Bio.Align.PairwiseAlignments object at 0x7f0d7ce716d0>
+
+
+
+```python
+# this recalls the reverse complement score of the negative strand
+aligner.score(target, reverse_complement(query), strand = "-")
+```
+
+
+
+
+    3.3
+
+
+
+
+```python
+print(alignments[0])
+```
+
+    target            0 AAACCC 6
+                      0 -||||- 6
+    query             4 -AACC- 0
+    
+
+
+
+```python
+# this recalls the reverse complement score of the positive strand
+aligner.score(target, reverse_complement(query), strand = "+")
+```
+
+
+
+
+    -2.0
+
+
+
+
+```python
+# this gives the same score of the reverse complement positive strand to give a better score 
+aligner.score(target, query, strand = "+")
+```
+
+
+
+
+    3.3
+
+
+## PLACE BLAST AND CHALLENGE HERE 
+
+## Open CV
+# Part 1
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+%matplotlib inline
+```
+
+
+```python
+# this imports the computer vision program
+import cv2
+```
+
+
+```python
+# this names the image that we want to read
+img = cv2.imread("Puppy.jpeg")
+```
+
+
+```python
+# this says the type of image
+type(img)
+```
+
+
+
+
+    numpy.ndarray
+
+
+
+
+```python
+# we assign when it is wrong as this
+img_wrong = cv2.imread("wrong/path/doesnot/abcedgh.jpg")
+```
+
+
+```python
+# this means we have loaded the incorrect image and serves as a checking service
+type(img_wrong)
+```
+
+
+
+
+    NoneType
+
+
+
+
+```python
+# this plots the image that we have uploaded... but they are blue. This function expects a different order of colors. 
+plt.imshow(img)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7fee88b8c950>
+
+
+
+![output_6_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/25149a76-8161-4e3b-aff2-fe8905781e5a)
+
+![png](output_6_1.png)
+
+
+
+```python
+# this converts the image to the correct coloring
+fix_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+```
+
+
+```python
+# this is the correct version 
+plt.imshow(fix_img)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7fee86abd4d0>
+
+
+![output_8_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/6348c522-ff8b-48a2-af37-588e608f1127)
+
+
+![png](output_8_1.png)
+
+
+
+```python
+# this creates gray images 
+img_gray = cv2.imread("Puppy.jpeg", cv2.IMREAD_GRAYSCALE)
+# this tells the size of the pixels
+img_gray.shape
+```
+
+
+
+
+    (462, 616)
+
+
+
+
+```python
+# this presents another color with how cv2 views RGB images
+plt.imshow(img_gray)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7fee86a96a50>
+
+
+![output_10_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/7c72fd0e-caaf-44a4-ae21-33cdc0e5b02b)
+
+
+![png](output_10_1.png)
+
+
+
+```python
+# this finally converts it to the gray image 
+plt.imshow(img_gray, cmap = "gray")
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7fee861fdc90>
+
+
+![output_11_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/da2ac10b-96f9-4874-87d1-c2a0a7c696f2)
+
+
+![png](output_11_1.png)
+
+
+
+```python
+# this gives the number of pixels
+fix_img.shape
+```
+
+
+
+
+    (462, 616, 3)
+
+
+
+
+```python
+# this resizes the image
+new_img = cv2.resize(fix_img,(1000,400))
+plt.imshow(new_img)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7fee86172210>
+
+
+
+![output_13_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/c5046291-3193-45f5-b141-9fc55079e323)
+
+![png](output_13_1.png)
+
+
+
+```python
+# this gives the new measurements
+new_img.shape
+```
+
+
+
+
+    (400, 1000, 3)
+
+
+
+
+```python
+# this changes the scale at which the image is portrayed
+w_ratio = 0.5
+h_ratio = 0.5
+
+new_img = cv2.resize(fix_img, (0,0), fix_img, w_ratio, h_ratio)
+```
+
+
+```python
+plt.imshow(new_img)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7fee860df590>
+
+
+
+![output_16_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/c546bb60-9733-4b75-91ce-9c2508a14bed)
+
+![png](output_16_1.png)
+
+
+
+```python
+# this flips it vertically
+flip_img = cv2.flip(fix_img, 0)
+plt.imshow(flip_img)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7fee860c0910>
+
+
+![output_17_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/513efbbd-38a1-4539-bc9a-48a46369e79c)
+
+
+![png](output_17_1.png)
+
+
+
+```python
+# this image is now flipped down and inversely
+flip_img2 = cv2.flip(fix_img, -1)
+plt.imshow(flip_img2)
+```
+
+
+
+
+    <matplotlib.image.AxesImage at 0x7fee86023a90>
+
+
+![output_18_1](https://github.com/chloeegreen/Advanced_Python_ChloeGreen/assets/133056315/47d1687f-65dd-4861-a2e2-418505be58e2)
+
+
+![png](output_18_1.png)
+
+
+
+```python
+type(fix_img)
+```
+
+
+
+
+    numpy.ndarray
+
+
+
+
+```python
+# this now saves it 
+cv2.imwrite("Puppy_fixed_image.jpeg", flip_img)
+```
+
+
+
+
+    True
+
+
+
+
+```python
+
