@@ -5352,11 +5352,99 @@ for alignment in blast_record.alignments:
 
     NameError: name 'blast_record' is not defined
 # Challenge 1
+## all of the annotations for this one are the same as the Blast 
+
+```python
+from Bio.Blast import NCBIWWW
+```
+
+
+```python
+NCBIWWW.email = "ceg037@latech.edu"
+```
+
+
+```python
+result_handle = NCBIWWW.qblast("blastn", "nt", "2956")
+```
+
+
+```python
+from Bio import SeqIO
+```
+
+
+```python
+record = SeqIO.read("MSH6.fasta", format = "fasta")
+```
+
+
+```python
+print(record)
+```
+
+    ID: NC_000002.12:47783145-47810101
+    Name: NC_000002.12:47783145-47810101
+    Description: NC_000002.12:47783145-47810101 Homo sapiens chromosome 2, GRCh38.p14 Primary Assembly
+    Number of features: 0
+    Seq('AGATTTCCCGCCAGCAGGAGCCGCGCGGTAGATGCGGTGCTTTTAGGAGCTCCG...CGA')
+
+
+
+```python
+result_handle = NCBIWWW.qblast("blastn", "nt", record.seq)
+```
+
+
+```python
+with open ("MSH6.fasta", "w") as out_handle:
+    out_handle.write(result_handle.read())
+    result_handle.close()
+```
+
+
+```python
+from Bio.Blast import NCBIXML
+```
+
+
+```python
+result_handle = open("my_blast.xml")
+```
+
+
+    ---------------------------------------------------------------------------
+
+    FileNotFoundError                         Traceback (most recent call last)
+
+    <ipython-input-11-5d5d42105f61> in <module>
+    ----> 1 result_handle = open("my_blast.xml")
+    
+
+    FileNotFoundError: [Errno 2] No such file or directory: 'my_blast.xml'
+
+
+
+```python
+E_VALUE_THRESH = 0.04
+```
+
+
+```python
+for alignment in blast_record.alignments:
+    for hsp in alignment.hsps:
+        if hsp.expect <E_VALUE_THRESH:
+            print(***ALIGNMENT***)
+            print("sequence:", alignment.title)
+            print("length:", alignment.length)
+            print("e value:", hsp.expect)
+            print(hsp.query[0:75] + "...")
+            print(hsp.match[0:75] + "...")
+            print(hsp.sbjct[0:75] + "...")
 
 
 # Open CV
 ## Part 1
-
 ```python
 import numpy as np
 import matplotlib.pyplot as plt
